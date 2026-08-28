@@ -1,15 +1,14 @@
-/* Fondo general sobrio, limpio y profesional (sin imágenes ruidosas) */
+/* Fondo general sobrio, limpio y profesional */
 body {
     background-color: #f3f4f6; /* Gris muy suave y neutro */
     font-family: 'Inter', sans-serif;
 }
 
 /* Efecto al seleccionar las tarjetas de tipo de seguro */
-input[type="radio"]:checked + span, 
+input[type="radio"]:checked + span,
 input[type="radio"]:checked ~ span {
     color: #4f46e5;
 }
-
 input[type="radio"]:checked {
     accent-color: #4f46e5;
 }
@@ -26,7 +25,6 @@ input[type="radio"]:checked {
     font-size: 13px;
     font-weight: 500;
 }
-
 .correcto {
     background-color: #d1fae5;
     border: 1px solid #34d399;
@@ -47,7 +45,6 @@ input[type="radio"]:checked {
     text-align: center;
     font-size: 10px;
 }
-  
 .spinner > div {
     background-color: #4f46e5;
     height: 100%;
@@ -55,13 +52,12 @@ input[type="radio"]:checked {
     display: inline-block;
     animation: sk-stretchdelay 1.2s infinite ease-in-out;
 }
-  
 .spinner .rect2 { animation-delay: -1.1s; }
 .spinner .rect3 { animation-delay: -1.0s; }
 .spinner .rect4 { animation-delay: -0.9s; }
 .spinner .rect5 { animation-delay: -0.8s; }
-  
+
 @keyframes sk-stretchdelay {
-    0%, 40%, 100% { transform: scaleY(0.4); }  
+    0%, 40%, 100% { transform: scaleY(0.4); }
     20% { transform: scaleY(1.0); }
 }
