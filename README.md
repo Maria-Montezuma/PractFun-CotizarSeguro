@@ -42,6 +42,3 @@ Esta práctica está diseñada para dominar la lógica de programación en **Jav
 * **HTML5:** Estructura semántica de la interfaz de usuario.
 * **CSS3:** Diseño responsivo, limpio y moderno.
 * **JavaScript (ES6+):** Funciones modularizadas, Clases (POO), manejo del DOM y eventos.
-
-
-    └── app.js        # Lógica del cotizador, clases y eventos del DOM
