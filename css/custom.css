@@ -1,6 +1,10 @@
-/* Fondo general con degradado moderno */
+/* Fondo general con imagen alusiva (oficina / escritorio) */
 body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1920&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     font-family: 'Inter', sans-serif;
 }
 
