@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Cotizador de Seguros Moderno</title>
+    <!-- Tailwind CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/custom.css">
 </head>
@@ -12,13 +13,16 @@
     <div class="container max-w-2xl mx-auto">
         <div id="contenido" class="bg-white rounded-3xl shadow-2xl overflow-hidden transition-all duration-300">
             
+            <!-- Encabezado -->
             <header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-6 px-8 text-center shadow-md">
                 <h1 class="text-3xl font-extrabold tracking-wide">Cotiza tu Seguro de Auto</h1>
                 <p class="text-indigo-200 text-sm mt-1">Protege tu vehículo con la mejor cobertura al instante</p>
             </header>
 
+            <!-- Formulario -->
             <form class="p-8 space-y-6" action="#" id="cotizar-seguro">
                 
+                <!-- Marca -->
                 <div>
                     <label class="block font-semibold text-gray-700 uppercase text-sm mb-2" for="marca">Marca del Vehículo:</label>
                     <select class="w-full bg-gray-50 border border-gray-300 rounded-xl p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all" id="marca">
@@ -29,6 +33,7 @@
                     </select>
                 </div>
 
+                <!-- Año -->
                 <div>
                     <label class="block font-semibold text-gray-700 uppercase text-sm mb-2" for="year">Año del Modelo:</label>
                     <select class="w-full bg-gray-50 border border-gray-300 rounded-xl p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all" id="year">
@@ -36,11 +41,13 @@
                     </select>
                 </div>
 
+                <!-- Tipo de Seguro (Tarjetas Interactivas) -->
                 <fieldset>
                     <legend class="block font-semibold text-gray-700 uppercase text-sm mb-3">Tipo de Cobertura:</legend>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         
-                        <label class="relative flex flex-col p-4 bg-gray-50 border-2 border-gray-200 rounded-2xl cursor-pointer hover:border-indigo-500 transition-all card-tipo">
+                        <!-- Opción Básico -->
+                        <label class="relative flex flex-col p-4 bg-gray-50 border-2 border-gray-200 rounded-2xl cursor-pointer hover:border-indigo-500 transition-all">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="font-bold text-gray-800">Básico</span>
                                 <input type="radio" name="tipo" value="basico" checked class="text-indigo-600 focus:ring-indigo-500">
@@ -48,7 +55,8 @@
                             <p class="text-xs text-gray-500">Cobertura esencial contra daños a terceros y normativas viales.</p>
                         </label>
 
-                        <label class="relative flex flex-col p-4 bg-gray-50 border-2 border-gray-200 rounded-2xl cursor-pointer hover:border-indigo-500 transition-all card-tipo">
+                        <!-- Opción Completo -->
+                        <label class="relative flex flex-col p-4 bg-gray-50 border-2 border-gray-200 rounded-2xl cursor-pointer hover:border-indigo-500 transition-all">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="font-bold text-gray-800">Completo</span>
                                 <input type="radio" name="tipo" value="completo" class="text-indigo-600 focus:ring-indigo-500">
@@ -59,6 +67,7 @@
                     </div>
                 </fieldset>
 
+                <!-- Spinner de Carga -->
                 <div id="cargando" class="hidden">
                     <div class="spinner">
                       <div class="rect1"></div>
@@ -69,8 +78,10 @@
                     </div>
                 </div>
 
+                <!-- Resultados -->
                 <div id="resultado"></div>
 
+                <!-- Botón de Envío -->
                 <div class="flex justify-center pt-2">
                     <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">
                         Cotizar Seguro Ahora
