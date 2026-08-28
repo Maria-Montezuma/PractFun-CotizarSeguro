@@ -1,10 +1,10 @@
-/* Fondo general sobrio, limpio y profesional */
+/* Fondo general sobrio y limpio */
 body {
-    background-color: #f3f4f6; /* Gris muy suave y neutro */
+    background-color: #f3f4f6;
     font-family: 'Inter', sans-serif;
 }
 
-/* Efecto al seleccionar las tarjetas de tipo de seguro */
+/* Selección de radios */
 input[type="radio"]:checked + span,
 input[type="radio"]:checked ~ span {
     color: #4f46e5;
@@ -17,38 +17,38 @@ input[type="radio"]:checked {
 .error {
     background-color: #fee2e2;
     border: 1px solid #f87171;
-    padding: 10px;
+    padding: 8px;
     border-radius: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-align: center;
     color: #b91c1c;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
 }
 .correcto {
     background-color: #d1fae5;
     border: 1px solid #34d399;
-    padding: 10px;
+    padding: 8px;
     border-radius: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-align: center;
     color: #065f46;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
 }
 
 /* Spinner Moderno */
 .spinner {
-    margin: 15px auto;
+    margin: 10px auto;
     width: 40px;
-    height: 30px;
+    height: 25px;
     text-align: center;
     font-size: 10px;
 }
 .spinner > div {
     background-color: #4f46e5;
     height: 100%;
-    width: 5px;
+    width: 4px;
     display: inline-block;
     animation: sk-stretchdelay 1.2s infinite ease-in-out;
 }
