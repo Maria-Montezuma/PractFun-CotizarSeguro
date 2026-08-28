@@ -1,97 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Cotizador de Seguros Moderno</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador de Seguros de Auto</title>
     <!-- Tailwind CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Estilos personalizados -->
     <link rel="stylesheet" href="css/custom.css">
 </head>
-<body class="min-h-screen flex items-center justify-center py-10 px-4">
+<body class="min-h-screen flex items-center justify-center p-4">
 
-    <div class="container max-w-2xl mx-auto">
-        <div id="contenido" class="bg-white rounded-3xl shadow-2xl overflow-hidden transition-all duration-300">
-            
-            <!-- Encabezado -->
-            <header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-6 px-8 text-center shadow-md">
-                <h1 class="text-3xl font-extrabold tracking-wide">Cotiza tu Seguro de Auto</h1>
-                <p class="text-indigo-200 text-sm mt-1">Protege tu vehículo con la mejor cobertura al instante</p>
-            </header>
+    <!-- Contenedor Principal en Dos Columnas (Sin Scroll) -->
+    <div class="w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-center">
+        
+        <!-- COLUMNA IZQUIERDA: Imagen limpia o ilustración institucional (Sin distracciones) -->
+        <div class="hidden lg:flex lg:col-span-5 bg-indigo-900 h-full min-h-[650px] flex-col justify-between p-10 text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div class="relative z-10">
+                <span class="bg-indigo-700 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Seguridad y Confianza</span>
+                <h1 class="text-3xl font-extrabold mt-4 leading-tight">Protege tu vehículo al instante</h1>
+                <p class="text-indigo-200 mt-2 text-sm">Calcula tu tarifa personalizada en pocos clics con la mejor cobertura del mercado.</p>
+            </div>
+            <div class="relative z-10 my-auto flex justify-center">
+                <!-- Imagen de auto limpia y moderna -->
+                <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop" alt="Auto Seguro" class="rounded-xl shadow-lg object-cover max-h-64 w-full">
+            </div>
+            <div class="relative z-10 text-xs text-indigo-300">
+                © 2026 PractFun Cotizador. Todos los derechos reservados.
+            </div>
+        </div>
 
-            <!-- Formulario -->
-            <form class="p-8 space-y-6" action="#" id="cotizar-seguro">
+        <!-- COLUMNA DERECHA: Formulario compacto sin scroll -->
+        <div class="lg:col-span-7 p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Cotiza tu Seguro de Auto</h2>
+                <p class="text-sm text-gray-500">Completa los datos para conocer tu resumen</p>
+            </div>
+
+            <!-- Contenedor de Alertas / Spinner -->
+            <div id="resultado"></div>
+
+            <!-- Formulario de Cotización -->
+            <form id="cotizador" class="space-y-4">
                 
-                <!-- Marca -->
+                <!-- Marca del vehículo -->
                 <div>
-                    <label class="block font-semibold text-gray-700 uppercase text-sm mb-2" for="marca">Marca del Vehículo:</label>
-                    <select class="w-full bg-gray-50 border border-gray-300 rounded-xl p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all" id="marca">
-                        <option value="">- Seleccione una marca -</option>
-                        <option value="1">Americano (+15%)</option>
-                        <option value="2">Asiático (+5%)</option>
+                    <label for="marca" class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Marca del Vehículo:</label>
+                    <select id="marca" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-sm text-gray-800 focus:ring-2 focus:ring-indigo-600 focus:outline-none">
+                        <option value="">-- Seleccione --</option>
+                        <option value="1">Americano (+5%)</option>
+                        <option value="2">Asiático (+30%)</option>
                         <option value="3">Europeo (+35%)</option>
                     </select>
                 </div>
 
-                <!-- Año -->
+                <!-- Año del modelo -->
                 <div>
-                    <label class="block font-semibold text-gray-700 uppercase text-sm mb-2" for="year">Año del Modelo:</label>
-                    <select class="w-full bg-gray-50 border border-gray-300 rounded-xl p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all" id="year">
-                        <option value="">- Seleccione un año -</option>
+                    <label for="year" class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Año del Modelo:</label>
+                    <select id="year" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-sm text-gray-800 focus:ring-2 focus:ring-indigo-600 focus:outline-none">
+                        <option value="">-- Seleccione --</option>
+                        <option value="2026">2026</option>
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="2014">2014</option>
+                        <option value="2013">2013</option>
+                        <option value="2012">2012</option>
                     </select>
                 </div>
 
-                <!-- Tipo de Seguro (Tarjetas Interactivas) -->
-                <fieldset>
-                    <legend class="block font-semibold text-gray-700 uppercase text-sm mb-3">Tipo de Cobertura:</legend>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        
-                        <!-- Opción Básico -->
-                        <label class="relative flex flex-col p-4 bg-gray-50 border-2 border-gray-200 rounded-2xl cursor-pointer hover:border-indigo-500 transition-all">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="font-bold text-gray-800">Básico</span>
-                                <input type="radio" name="tipo" value="basico" checked class="text-indigo-600 focus:ring-indigo-500">
+                <!-- Tipo de Cobertura -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Tipo de Cobertura:</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="border border-gray-200 rounded-xl p-3 flex flex-col cursor-pointer hover:border-indigo-600 transition">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold text-sm text-gray-800">Básico</span>
+                                <input type="radio" name="tipo" value="basico" class="text-indigo-600 focus:ring-indigo-500">
                             </div>
-                            <p class="text-xs text-gray-500">Cobertura esencial contra daños a terceros y normativas viales.</p>
+                            <span class="text-[11px] text-gray-500 mt-1">Daños a terceros y viales.</span>
                         </label>
-
-                        <!-- Opción Completo -->
-                        <label class="relative flex flex-col p-4 bg-gray-50 border-2 border-gray-200 rounded-2xl cursor-pointer hover:border-indigo-500 transition-all">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="font-bold text-gray-800">Completo</span>
+                        <label class="border border-gray-200 rounded-xl p-3 flex flex-col cursor-pointer hover:border-indigo-600 transition">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold text-sm text-gray-800">Completo</span>
                                 <input type="radio" name="tipo" value="completo" class="text-indigo-600 focus:ring-indigo-500">
                             </div>
-                            <p class="text-xs text-gray-500">Cobertura total, daños propios, robo y asistencia vial 24/7.</p>
+                            <span class="text-[11px] text-gray-500 mt-1">Cobertura total y asistencia 24/7.</span>
                         </label>
-
-                    </div>
-                </fieldset>
-
-                <!-- Spinner de Carga -->
-                <div id="cargando" class="hidden">
-                    <div class="spinner">
-                      <div class="rect1"></div>
-                      <div class="rect2"></div>
-                      <div class="rect3"></div>
-                      <div class="rect4"></div>
-                      <div class="rect5"></div>
                     </div>
                 </div>
-
-                <!-- Resultados -->
-                <div id="resultado"></div>
 
                 <!-- Botón de Envío -->
-                <div class="flex justify-center pt-2">
-                    <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">
-                        Cotizar Seguro Ahora
-                    </button>
-                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-xl transition duration-200 shadow-md text-sm">
+                    Cotizar Seguro Ahora
+                </button>
 
             </form>
         </div>
+
     </div>
 
+    <!-- Script principal -->
     <script src="js/app.js"></script>
 </body>
 </html>
