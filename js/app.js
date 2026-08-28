@@ -10,13 +10,14 @@ Seguro.prototype.cotizarSeguro = function(){
     const base = 2000;
 
     switch(this.marca){
-        case '1': cantidad = base * 1.15; break;
-        case '2': cantidad = base * 1.05; break;
-        case '3': cantidad = base * 1.35; break;
+        case '1': cantidad = base * 1.15; break; // Americano
+        case '2': cantidad = base * 1.05; break; // Asiático
+        case '3': cantidad = base * 1.35; break; // Europeo
         default: break;
     } 
 
     const diferencia = new Date().getFullYear() - this.year;
+    // Cada año de antigüedad reduce el costo un 3%
     cantidad -= ((diferencia * 3) * cantidad) / 100;
 
     if(this.tipo === 'basico'){
@@ -60,28 +61,47 @@ Interfaz.prototype.mostrarMensaje = (mensaje, tipo) => {
     div.textContent = mensaje;
 
     const form = document.querySelector('#cotizar-seguro');
-    form.insertBefore(div, document.querySelector('#resultado'));
+    // Inserta antes del div resultado
+    form.insertBefore(div, document.querySelector('#cargando'));
 
     setTimeout(() => {
         div.remove();
     }, 3000);
 }
 
-Interfaz.prototype.mostrarResultado = (seguro, total)=>{
+Interfaz.prototype.mostrarResultado = (seguro, total) => {
     const {marca, year, tipo} = seguro;
 
     let textoMarca;
+    let urlImagenPrincipal;
+
+    // Cambiar texto e imagen principal según la marca
     switch(marca){
-        case '1': textoMarca = 'Americano'; break;
-        case '2': textoMarca = 'Asiático'; break;
-        case '3': textoMarca = 'Europeo'; break;
+        case '1': 
+            textoMarca = 'Americano'; 
+            urlImagenPrincipal = 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop'; // Estilo Muscle Car / Chevy
+            break;
+        case '2': 
+            textoMarca = 'Asiático'; 
+            urlImagenPrincipal = 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=800&auto=format&fit=crop'; // Estilo Toyota/Nissan
+            break;
+        case '3': 
+            textoMarca = 'Europeo'; 
+            urlImagenPrincipal = 'https://images.unsplash.com/photo-1503376710362-80f43a2862bc?q=80&w=800&auto=format&fit=crop'; // Estilo Porsche/BMW
+            break;
         default: break;
     }
 
-    // Definir imagen temática según el tipo de seguro
+    // Actualizar la imagen en la columna izquierda dinámicamente
+    const imagenAuto = document.querySelector('#imagen-auto');
+    if(imagenAuto) {
+        imagenAuto.src = urlImagenPrincipal;
+    }
+
+    // Definir imagen temática de la tarjeta según el tipo de seguro
     const imagenSeguro = tipo === 'basico' 
-        ? 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=600&q=80' // Imagen protectora / auto estándar
-        : 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=600&q=80'; // Imagen auto de lujo / cobertura total
+        ? 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=600&q=80' 
+        : 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=600&q=80'; 
 
     const div = document.createElement('div');
     div.classList.add('mt-6', 'bg-gray-50', 'border', 'border-indigo-100', 'rounded-2xl', 'overflow-hidden', 'shadow-md');
@@ -108,6 +128,13 @@ Interfaz.prototype.mostrarResultado = (seguro, total)=>{
 
     const resultadoDiv = document.querySelector('#resultado'); 
     const spinner = document.querySelector('#cargando');
+    
+    // Ocultar resultados previos
+    const resultadosPrevios = document.querySelector('#resultado div');
+    if(resultadosPrevios != null){
+        resultadosPrevios.remove();
+    }
+    
     spinner.style.display = 'block';
 
     setTimeout(() => {
@@ -116,12 +143,14 @@ Interfaz.prototype.mostrarResultado = (seguro, total)=>{
     }, 2000);
 }
 
+// Instanciar UI
 const interfaz = new Interfaz();
 
 document.addEventListener('DOMContentLoaded', () => {
     interfaz.llenarOpciones();
 });
 
+// Event Listeners
 listaEventos();
 function listaEventos(){
     const form = document.querySelector('#cotizar-seguro');
@@ -132,19 +161,18 @@ function cotizarSeguro(e){
     e.preventDefault();
     const marca = document.querySelector('#marca').value;
     const year = document.querySelector('#year').value;
-    const tipo = document.querySelector('input[name=tipo]:checked').value;
-
-    if(marca === '' || year === '' || tipo === ''){
+    
+    // Verificar si hay un tipo seleccionado (evitar error si el usuario no hace clic)
+    const tipoSeleccionado = document.querySelector('input[name=tipo]:checked');
+    
+    if(marca === '' || year === '' || !tipoSeleccionado){
         interfaz.mostrarMensaje('Todos los campos son obligatorios', 'error');
         return;
     }
 
-    interfaz.mostrarMensaje('Calculando tu cotización...', 'exito');
+    const tipo = tipoSeleccionado.value;
 
-    const resultados = document.querySelector('#resultado div');
-    if(resultados != null){
-        resultados.remove();
-    }
+    interfaz.mostrarMensaje('Calculando tu cotización...', 'exito');
 
     const seguro = new Seguro(marca, year, tipo);
     const total = seguro.cotizarSeguro();
