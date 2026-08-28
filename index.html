@@ -11,10 +11,10 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
 
-    <!-- Contenedor Principal en Dos Columnas (Sin Scroll) -->
+    <!-- Contenedor Principal -->
     <div class="w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-center">
         
-        <!-- COLUMNA IZQUIERDA: Imagen limpia o ilustración institucional (Sin distracciones) -->
+        <!-- COLUMNA IZQUIERDA -->
         <div class="hidden lg:flex lg:col-span-5 bg-indigo-900 h-full min-h-[650px] flex-col justify-between p-10 text-white relative overflow-hidden">
             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
             <div class="relative z-10">
@@ -23,34 +23,31 @@
                 <p class="text-indigo-200 mt-2 text-sm">Calcula tu tarifa personalizada en pocos clics con la mejor cobertura del mercado.</p>
             </div>
             <div class="relative z-10 my-auto flex justify-center">
-                <!-- Imagen de auto limpia y moderna -->
-                <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop" alt="Auto Seguro" class="rounded-xl shadow-lg object-cover max-h-64 w-full">
+                <!-- Imagen de auto dinámica con ID para JS -->
+                <img id="imagen-auto" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop" alt="Auto Seguro" class="rounded-xl shadow-lg object-cover max-h-64 w-full transition-all duration-500">
             </div>
             <div class="relative z-10 text-xs text-indigo-300">
                 © 2026 PractFun Cotizador. Todos los derechos reservados.
             </div>
         </div>
 
-        <!-- COLUMNA DERECHA: Formulario compacto sin scroll -->
+        <!-- COLUMNA DERECHA -->
         <div class="lg:col-span-7 p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
             <div class="text-center mb-6">
                 <h2 class="text-2xl font-bold text-gray-800">Cotiza tu Seguro de Auto</h2>
                 <p class="text-sm text-gray-500">Completa los datos para conocer tu resumen</p>
             </div>
 
-            <!-- Contenedor de Alertas / Spinner -->
-            <div id="resultado"></div>
-
             <!-- Formulario de Cotización -->
-            <form id="cotizador" class="space-y-4">
+            <form id="cotizar-seguro" class="space-y-4">
                 
                 <!-- Marca del vehículo -->
                 <div>
                     <label for="marca" class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Marca del Vehículo:</label>
                     <select id="marca" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-sm text-gray-800 focus:ring-2 focus:ring-indigo-600 focus:outline-none">
                         <option value="">-- Seleccione --</option>
-                        <option value="1">Americano (+5%)</option>
-                        <option value="2">Asiático (+30%)</option>
+                        <option value="1">Americano (+15%)</option>
+                        <option value="2">Asiático (+5%)</option>
                         <option value="3">Europeo (+35%)</option>
                     </select>
                 </div>
@@ -60,21 +57,7 @@
                     <label for="year" class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Año del Modelo:</label>
                     <select id="year" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-sm text-gray-800 focus:ring-2 focus:ring-indigo-600 focus:outline-none">
                         <option value="">-- Seleccione --</option>
-                        <option value="2026">2026</option>
-                        <option value="2025">2025</option>
-                        <option value="2024">2024</option>
-                        <option value="2023">2023</option>
-                        <option value="2022">2022</option>
-                        <option value="2021">2021</option>
-                        <option value="2020">2020</option>
-                        <option value="2019">2019</option>
-                        <option value="2018">2018</option>
-                        <option value="2017">2017</option>
-                        <option value="2016">2016</option>
-                        <option value="2015">2015</option>
-                        <option value="2014">2014</option>
-                        <option value="2013">2013</option>
-                        <option value="2012">2012</option>
+                        <!-- Las opciones se llenan con JS -->
                     </select>
                 </div>
 
@@ -99,8 +82,20 @@
                     </div>
                 </div>
 
+                <!-- Spinner HTML añadido para que funcione el script -->
+                <div id="cargando" class="spinner" style="display: none;">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
+                
+                <!-- Contenedor de Resultados -->
+                <div id="resultado"></div>
+
                 <!-- Botón de Envío -->
-                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-xl transition duration-200 shadow-md text-sm">
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-xl transition duration-200 shadow-md text-sm mt-4">
                     Cotizar Seguro Ahora
                 </button>
 
