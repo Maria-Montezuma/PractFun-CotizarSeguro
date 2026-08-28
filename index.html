@@ -1,78 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
+<html lang="es">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="css/tailwind.css">
+    <title>Cotizador de Seguros Moderno</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/custom.css">
-  </head>
-  <body>
-<div class="container mx-auto">
-      <div id="contenido" class="pb-10">
-            <header class="bg-teal-500 text-white py-3 font-bold uppercase">
-                <h1 class="text-center">Cotiza tu seguro de Auto</h1>
+</head>
+<body class="min-h-screen flex items-center justify-center py-10 px-4">
+
+    <div class="container max-w-2xl mx-auto">
+        <div id="contenido" class="bg-white rounded-3xl shadow-2xl overflow-hidden transition-all duration-300">
+            
+            <header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-6 px-8 text-center shadow-md">
+                <h1 class="text-3xl font-extrabold tracking-wide">Cotiza tu Seguro de Auto</h1>
+                <p class="text-indigo-200 text-sm mt-1">Protege tu vehículo con la mejor cobertura al instante</p>
             </header>
-                <form class="mt-10 max-w-lg mx-auto" action="#" id="cotizar-seguro">
-                        <div class="flex items-center mb-5">
-                            <label 
-                              class="font-bold  uppercase mr-2 w-20"
-                              for="marca"
-                            >Marca:</label>
-                            <select class="flex-1 bg-gray-100 p-3 appearance-none" id="marca">
-                                <option value="">- Seleccionar -</option>
-                                <option value="1">Americano</option>
-                                <option value="2">Asiatico</option>
-                                <option value="3">Europeo</option>
-                            </select>
-                        </div>
-                        <div class="flex items-center mb-5">
-                              <label 
-                                class="font-bold  uppercase mr-2 w-20"
-                                for="year"
-                              >Año:</label>
-                              <select  class="flex-1 bg-gray-100 p-3 appearance-none" id="year"></select>
-                        </div>
-                        <fieldset>
-                              <legend  class="font-bold  uppercase text-2xl text-center w-full">Tipo Seguro</legend>
 
-                              <div class="flex justify-around mt-5">
-                                  <div>
-                                      <label class="font-bold  uppercase mr-2">Básico</label>
-                                          <input type="radio" name="tipo" value="basico" checked>
-                                      </label>
-                                  </div>
-                                  <div>
-                                      <label class="font-bold  uppercase mr-2">Completo</label>
-                                          <input type="radio" name="tipo" value="completo">
-                                      </label>
-                                  </div>
-                              </div>
-                      </fieldset>
+            <form class="p-8 space-y-6" action="#" id="cotizar-seguro">
+                
+                <div>
+                    <label class="block font-semibold text-gray-700 uppercase text-sm mb-2" for="marca">Marca del Vehículo:</label>
+                    <select class="w-full bg-gray-50 border border-gray-300 rounded-xl p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all" id="marca">
+                        <option value="">- Seleccione una marca -</option>
+                        <option value="1">Americano (+15%)</option>
+                        <option value="2">Asiático (+5%)</option>
+                        <option value="3">Europeo (+35%)</option>
+                    </select>
+                </div>
 
-                  <div id="cargando" class="hidden">
-                        <div class="spinner">
-                          <div class="rect1"></div>
-                          <div class="rect2"></div>
-                          <div class="rect3"></div>
-                          <div class="rect4"></div>
-                          <div class="rect5"></div>
-                      </div>
-                  </div>
-                  <div id="resultado"></div>
-                  <div class="flex  justify-center py-4">
-                      <button 
-                        type="submit" 
-                        class="mx-auto bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-20 rounded"
-                        >Cotizar Seguro
+                <div>
+                    <label class="block font-semibold text-gray-700 uppercase text-sm mb-2" for="year">Año del Modelo:</label>
+                    <select class="w-full bg-gray-50 border border-gray-300 rounded-xl p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all" id="year">
+                        <option value="">- Seleccione un año -</option>
+                    </select>
+                </div>
+
+                <fieldset>
+                    <legend class="block font-semibold text-gray-700 uppercase text-sm mb-3">Tipo de Cobertura:</legend>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        
+                        <label class="relative flex flex-col p-4 bg-gray-50 border-2 border-gray-200 rounded-2xl cursor-pointer hover:border-indigo-500 transition-all card-tipo">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-gray-800">Básico</span>
+                                <input type="radio" name="tipo" value="basico" checked class="text-indigo-600 focus:ring-indigo-500">
+                            </div>
+                            <p class="text-xs text-gray-500">Cobertura esencial contra daños a terceros y normativas viales.</p>
+                        </label>
+
+                        <label class="relative flex flex-col p-4 bg-gray-50 border-2 border-gray-200 rounded-2xl cursor-pointer hover:border-indigo-500 transition-all card-tipo">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-gray-800">Completo</span>
+                                <input type="radio" name="tipo" value="completo" class="text-indigo-600 focus:ring-indigo-500">
+                            </div>
+                            <p class="text-xs text-gray-500">Cobertura total, daños propios, robo y asistencia vial 24/7.</p>
+                        </label>
+
+                    </div>
+                </fieldset>
+
+                <div id="cargando" class="hidden">
+                    <div class="spinner">
+                      <div class="rect1"></div>
+                      <div class="rect2"></div>
+                      <div class="rect3"></div>
+                      <div class="rect4"></div>
+                      <div class="rect5"></div>
+                    </div>
+                </div>
+
+                <div id="resultado"></div>
+
+                <div class="flex justify-center pt-2">
+                    <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">
+                        Cotizar Seguro Ahora
                     </button>
-                  </div>
- 
-                </form> 
-      </div> <!--#contenido-->
-</div>
+                </div>
 
-  <script src="js/app.js"></script>
-  </body>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
 </html>
