@@ -1,4 +1,28 @@
-// Constructores  
+// =========================================================================
+// CONFIGURACIÓN DE IMÁGENES
+// Reemplaza las comillas por las URLs o rutas de tus imágenes locales/servidor
+// =========================================================================
+const IMAGENES_VEHICULOS = {
+    '1': { // AMERICANO
+        reciente: 'assets/americano-reciente.png',
+        medio:    'assets/americano-medio.png',
+        antiguo:  'assets/americano-viejo.png'
+    },
+    '2': { // ASIÁTICO
+        reciente: 'assets/asiatico-reciente.png',
+        medio:    'assets/asiatico-medio.png',
+        antiguo:  'assets/asiatico-viejo.png'
+    },
+    '3': { // EUROPEO
+        reciente: 'assets/europeo-reciente.png',
+        medio:    'assets/europeo-medio.png',
+        antiguo:  'assets/europeo-viejo.png'
+    }
+};
+
+// =========================================================================
+// CONSTRUCTORES Y MÉTODOS DE LÓGICA
+// =========================================================================
 function Seguro(marca, year, tipo){
     this.marca = marca;
     this.year = year;
@@ -71,29 +95,7 @@ Interfaz.prototype.mostrarResultado = (seguro, total) => {
     const {marca, year, tipo} = seguro;
     const anioNum = parseInt(year);
 
-    let textoMarca;
-    let urlImagenVehiculo;
-
-    // Diccionario de imágenes por Marca y Rango de Años
-    const imagenes = {
-        '1': { // Americano
-            reciente: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop', // Camaro moderno
-            medio: 'https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?q=80&w=800&auto=format&fit=crop',    // Mustang intermedio
-            antiguo: 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?q=80&w=800&auto=format&fit=crop'   // Sedan clásico
-        },
-        '2': { // Asiático
-            reciente: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=800&auto=format&fit=crop', // Deportivo asiático reciente
-            medio: 'https://images.unsplash.com/photo-1590362891991-f776e747a588?q=80&w=800&auto=format&fit=crop',    // SUV/Sedan asiático
-            antiguo: 'https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?q=80&w=800&auto=format&fit=crop'   // Sedan más antiguo
-        },
-        '3': { // Europeo
-            reciente: 'https://images.unsplash.com/photo-1503376710362-80f43a2862bc?q=80&w=800&auto=format&fit=crop', // Porsche/BMW moderno
-            medio: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=800&auto=format&fit=crop',    // BMW 2018-2022
-            antiguo: 'https://images.unsplash.com/photo-1541348263662-e068662d82af?q=80&w=800&auto=format&fit=crop'   // Audi/Merc clásico
-        }
-    };
-
-    // Determinar rango de año
+    // Determinar el rango de año
     let rangoAño = 'reciente';
     if (anioNum <= 2017) {
         rangoAño = 'antiguo';
@@ -101,16 +103,18 @@ Interfaz.prototype.mostrarResultado = (seguro, total) => {
         rangoAño = 'medio';
     }
 
-    // Asignar texto de marca y la imagen específica según marca y año
+    // Texto descriptivo de la marca
+    let textoMarca;
     switch(marca){
         case '1': textoMarca = 'Americano'; break;
         case '2': textoMarca = 'Asiático'; break;
         case '3': textoMarca = 'Europeo'; break;
     }
 
-    urlImagenVehiculo = imagenes[marca][rangoAño];
+    // Obtener enlace dinámico desde la configuración global
+    const urlImagenVehiculo = IMAGENES_VEHICULOS[marca][rangoAño];
 
-    // Actualizar Panel Izquierdo (Imagen, Título y Badge dinámicos)
+    // Actualizar Panel Izquierdo (Imagen, Título y Badge)
     const tagIzq = document.querySelector('#tag-izq');
     const tituloIzq = document.querySelector('#titulo-izq');
     const subtituloIzq = document.querySelector('#subtitulo-izq');
@@ -118,10 +122,10 @@ Interfaz.prototype.mostrarResultado = (seguro, total) => {
 
     if(tagIzq) tagIzq.textContent = `Cotización: ${tipo.toUpperCase()}`;
     if(tituloIzq) tituloIzq.textContent = `${textoMarca} (${year})`;
-    if(subtituloIzq) subtituloIzq.textContent = `Cobertura ${tipo} personalizada para un vehículo modelo ${year}.`;
+    if(subtituloIzq) subtituloIzq.textContent = `Tu seguro incluye la cobertura ${tipo} con la mejor asistencia vial.`;
     if(imagenAuto) imagenAuto.src = urlImagenVehiculo;
 
-    // Resumen Compacto en el Panel Derecho (SIN imagen)
+    // Crear Resumen en el Panel Derecho
     const div = document.createElement('div');
     div.classList.add('bg-gray-50', 'border', 'border-indigo-100', 'rounded-xl', 'overflow-hidden', 'shadow-sm');
     div.innerHTML = `
@@ -142,12 +146,13 @@ Interfaz.prototype.mostrarResultado = (seguro, total) => {
     const resultadoDiv = document.querySelector('#resultado'); 
     const spinner = document.querySelector('#cargando');
     
-    // Limpiar resultados anteriores
+    // Limpiar cotización previa
     const resumenPrevio = resultadoDiv.querySelector('.bg-gray-50');
     if(resumenPrevio){
         resumenPrevio.remove();
     }
     
+    // Mostrar spinner y renderizar
     spinner.style.display = 'block';
 
     setTimeout(() => {
@@ -156,52 +161,9 @@ Interfaz.prototype.mostrarResultado = (seguro, total) => {
     }, 1200);
 }
 
-    // Actualizar Panel Izquierdo (Imagen, Título y Badge dinámicos)
-    const tagIzq = document.querySelector('#tag-izq');
-    const tituloIzq = document.querySelector('#titulo-izq');
-    const subtituloIzq = document.querySelector('#subtitulo-izq');
-    const imagenAuto = document.querySelector('#imagen-auto');
-
-    if(tagIzq) tagIzq.textContent = `Cotización: ${tipo.toUpperCase()}`;
-    if(tituloIzq) tituloIzq.textContent = `${textoMarca} ${year}`;
-    if(subtituloIzq) subtituloIzq.textContent = `Tu seguro incluye la cobertura ${tipo} con la mejor asistencia vial.`;
-    if(imagenAuto) imagenAuto.src = urlImagenVehiculo;
-
-    // Resumen Compacto en el Panel Derecho (SIN imagen)
-    const div = document.createElement('div');
-    div.classList.add('bg-gray-50', 'border', 'border-indigo-100', 'rounded-xl', 'overflow-hidden', 'shadow-sm');
-    div.innerHTML = `
-        <div class="bg-indigo-600 text-white font-bold text-center py-2 uppercase tracking-wider text-xs">
-            Resumen de tu Cotización
-        </div>
-        <div class="p-4 space-y-2 text-xs text-gray-700">
-            <p class="flex justify-between border-b border-gray-200 pb-1.5"><span class="font-semibold text-gray-600">Marca:</span> <span class="text-gray-900 font-medium">${textoMarca}</span></p>
-            <p class="flex justify-between border-b border-gray-200 pb-1.5"><span class="font-semibold text-gray-600">Año:</span> <span class="text-gray-900 font-medium">${year}</span></p>
-            <p class="flex justify-between border-b border-gray-200 pb-1.5"><span class="font-semibold text-gray-600">Tipo:</span> <span class="text-gray-900 font-medium capitalize">${tipo}</span></p>
-            <div class="flex justify-between items-center pt-2">
-                <span class="font-bold text-sm text-indigo-600">Total Estimado:</span> 
-                <span class="font-extrabold text-xl text-indigo-700">$${total}</span>
-            </div>
-        </div>
-    `;
-
-    const resultadoDiv = document.querySelector('#resultado'); 
-    const spinner = document.querySelector('#cargando');
-    
-    // Limpiar resultados anteriores
-    const resumenPrevio = resultadoDiv.querySelector('.bg-gray-50');
-    if(resumenPrevio){
-        resumenPrevio.remove();
-    }
-    
-    spinner.style.display = 'block';
-
-    setTimeout(() => {
-        spinner.style.display = 'none';
-        resultadoDiv.appendChild(div);
-    }, 1500);
-}
-
+// =========================================================================
+// INICIALIZACIÓN Y EVENTOS
+// =========================================================================
 const interfaz = new Interfaz();
 
 document.addEventListener('DOMContentLoaded', () => {
