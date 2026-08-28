@@ -1,10 +1,6 @@
-/* Fondo general con imagen alusiva (oficina / escritorio) */
+/* Fondo general sobrio, limpio y profesional (sin imágenes ruidosas) */
 body {
-    background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1920&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-color: #f3f4f6; /* Gris muy suave y neutro */
     font-family: 'Inter', sans-serif;
 }
 
@@ -22,30 +18,32 @@ input[type="radio"]:checked {
 .error {
     background-color: #fee2e2;
     border: 1px solid #f87171;
-    padding: 12px;
-    border-radius: 12px;
-    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
     text-align: center;
     color: #b91c1c;
+    font-size: 13px;
     font-weight: 500;
 }
 
 .correcto {
     background-color: #d1fae5;
     border: 1px solid #34d399;
-    padding: 12px;
-    border-radius: 12px;
-    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
     text-align: center;
     color: #065f46;
+    font-size: 13px;
     font-weight: 500;
 }
 
 /* Spinner Moderno */
 .spinner {
-    margin: 30px auto;
-    width: 50px;
-    height: 40px;
+    margin: 15px auto;
+    width: 40px;
+    height: 30px;
     text-align: center;
     font-size: 10px;
 }
@@ -53,7 +51,7 @@ input[type="radio"]:checked {
 .spinner > div {
     background-color: #4f46e5;
     height: 100%;
-    width: 6px;
+    width: 5px;
     display: inline-block;
     animation: sk-stretchdelay 1.2s infinite ease-in-out;
 }
